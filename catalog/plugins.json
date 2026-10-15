@@ -1,0 +1,51 @@
+{
+  "$说明": "内置插件目录。这个文件是插件市场的「离线货架」——程序自带这些插件，不需要连 GitHub 就能装。往这里加一条就是上架一个新插件：把插件目录放进 plugins/，再在下面加一项。",
+  "$字段说明": {
+    "name": "插件目录名，必须和 plugins/<name> 一致",
+    "title": "界面上显示的名字",
+    "description": "一句话说明它能干什么",
+    "tags": "分类标签，界面上用来筛选",
+    "official": "true = 随程序发布、由本项目维护",
+    "requires": "需要额外准备的东西（比如 API Key），没有也装得上，界面会提示"
+  },
+  "updatedAt": "2026-09-24",
+  "plugins": [
+    {
+      "name": "context-compact",
+      "title": "上下文压缩",
+      "description": "把较早的对话交给模型总结成摘要，腾出上下文空间。默认手动触发（输入区的「压缩上下文」按钮或 /compact）。",
+      "tags": ["官方", "上下文"],
+      "official": true,
+      "default": true
+    },
+    {
+      "name": "websearch",
+      "title": "联网搜索（第三方服务示例）",
+      "description": "演示「插件怎么读 API Key 去接第三方服务」：注册一个 tavily_search 工具联网查资料。日常联网请用内置的 web_search，它免密钥、开箱可用；这个插件的价值是当「读密钥 + 发请求」的抄写模板。",
+      "tags": ["官方", "联网", "示例"],
+      "official": true,
+      "requires": ["Tavily API Key（环境变量 MYA_TAVILY_KEY，或在插件配置里填）"]
+    },
+    {
+      "name": "fs-extra",
+      "title": "文件增强",
+      "description": "补几个常用文件操作：列目录树、统计、按内容批量替换、算文件哈希。",
+      "tags": ["官方", "文件"],
+      "official": true
+    },
+    {
+      "name": "audit",
+      "title": "操作审计",
+      "description": "记录每一次工具调用（谁在什么时候改了什么），并拦截明显危险的命令。装插件不放心时建议开着。",
+      "tags": ["官方", "安全"],
+      "official": true
+    },
+    {
+      "name": "hello",
+      "title": "示例插件（照着写）",
+      "description": "最小可运行示例：一个工具、一个命令、一个钩子，三种扩展点各演示一遍。想自己写插件就从这个开始抄。",
+      "tags": ["官方", "示例"],
+      "official": true
+    }
+  ]
+}

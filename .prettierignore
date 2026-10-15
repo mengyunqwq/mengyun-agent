@@ -1,0 +1,15 @@
+# prettier 不要碰的东西
+node_modules/
+dist/
+.mya/
+build/
+package-lock.json
+
+# 文档不参与自动格式化：README/docs 里有大量手工排版的 ASCII 图、表格和对齐的示例，
+# prettier 一跑就会把它们reflow 得难以阅读（而且会产生几百行无意义 diff）。
+# 想要格式化文档，单独执行 prettier --write 文档文件即可。
+README.md
+docs/
+
+# 插件自带的模板/骨架文件由插件自己维护
+plugins/**/template/**

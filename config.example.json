@@ -1,0 +1,86 @@
+{
+  "$comment": "梦云 Agent 配置模板。复制成 config.json 再改：cp config.example.json config.json（Windows: copy config.example.json config.json）。带 $ 前缀的键是说明文字，加载时会被自动忽略。",
+  "$说明": "为什么要有这个模板：真正的 config.json 里会写你自己的网关地址和密钥，不该进版本库（.gitignore 已经忽略它）。给别人用的模板就放这里，里面的敏感字段一律留空。",
+  "provider": "deepseek",
+  "$provider可选值": "deepseek | openai | ollama | custom（任何 OpenAI 兼容网关）",
+  "apiFormat": "auto",
+  "$apiFormat说明": "接口协议：auto（按地址自动识别）| openai | anthropic | gemini。中转站的实际协议不一定和宣传一致；连不上又报 404/401 时，换个格式再试。",
+  "apiKey": "",
+  "$apiKey说明": "填你的密钥。更推荐写在 .env 里（MYA_API_KEY=...），那个文件默认不进版本库；这里留空即可。",
+  "baseUrl": "",
+  "$baseUrl说明": "填你的网关地址，结尾不要带 /chat/completions，只写到 /v1 即可。例：https://api.deepseek.com/v1",
+  "model": "",
+  "$model说明": "必须是网关分组里真实存在的模型名。名字写错时服务端会返回可用列表，程序会把列表打出来；也可以点界面上的「获取列表」直接拉一份。",
+  "temperature": 0.3,
+  "reasoning": {
+    "level": "auto",
+    "$level说明": "推理等级。auto = 不发送任何推理字段（默认）。可选 minimal | low | medium | high：OpenAI 兼容协议发 reasoning_effort，Anthropic 发 thinking.budget_tokens，Gemini 发 thinkingConfig.thinkingBudget——按各家的官方定义翻译，见 src/reasoning.js。"
+  },
+  "maxTurns": 25,
+  "$maxTurns说明": "单轮对话中模型最多连续调用工具的轮数，防止死循环烧钱。",
+  "timeoutSec": 120,
+  "stream": true,
+  "lang": "zh",
+  "contextWindow": 0,
+  "$contextWindow说明": "模型上下文窗口（token）。0 = 按模型名自动推断；也可以填网关实际给的数字。界面输入区那圈用量环拿它当分母。",
+  "compact": {
+    "enabled": true,
+    "auto": true,
+    "$auto说明": "true = 用量超过阈值时自动压缩（默认，阈值 0.62）；false = 只在你按键或发 /compact 时压。压缩会改写历史，所以每次压缩都会在对话里留一条可展开的记录。",
+    "$enabled说明": "由 context-compact 插件实现的上下文压缩：对话变长时把较早的历史总结成摘要。",
+    "threshold": 0.62,
+    "$threshold说明": "用量超过这个比例就压缩（0.3~0.95）。",
+    "keepRecent": 8,
+    "$keepRecent说明": "压缩后保留最近多少条消息原样不动。",
+    "maxSummaryTokens": 1200,
+    "$maxSummaryTokens说明": "摘要的长度上限，写进提示词里约束模型。"
+  },
+  "systemPromptFile": "prompts/system.zh.md",
+  "$systemPromptFile说明": "留空则使用内置默认人格提示词。",
+  "approval": {
+    "mode": "ask",
+    "$approval说明": "权限档位：ask=每次都问（默认）；workspace=工作区内的写文件和命令免问，越界仍然问；full=完全权限，不再问（rm -rf / 这类硬黑名单永远会拦）。界面上在输入区的「权限」栏里切。"
+  },
+  "tasks": {
+    "enabled": true,
+    "maxParallel": 3,
+    "maxDepth": 1,
+    "maxTasks": 6,
+    "subTurns": 12,
+    "subTimeoutSec": 600,
+    "budgetTurns": 30,
+    "budgetTokens": 200000,
+    "readonlyTools": ["read", "glob", "grep"],
+    "$tasks说明": "复杂任务的并行拆分：模型用 task_spawn 拆出子任务，task_wait 收结论。子任务默认只有只读工具（并行写同一个文件必然互相覆盖）；maxDepth=1 表示子任务不能再拆；budgetTurns/budgetTokens 是「一次用户消息」里所有子任务的总预算，超了就不再允许拆。"
+  },
+  "tools": {
+    "autoApprove": [
+      "read",
+      "glob",
+      "grep"
+    ],
+    "$autoApprove说明": "这些工具免确认直接执行；shell/write 默认每次都要你按 y。",
+    "deny": [],
+    "$deny说明": "被禁用的工具名列表，插件工具也可以在这里屏蔽。",
+    "maxOutputChars": 30000,
+    "$maxOutputChars说明": "单个工具返回内容的上限，超出会截断，避免撑爆上下文。"
+  },
+  "plugins": {
+    "enabled": true,
+    "dirs": [
+      "plugins"
+    ],
+    "$dirs说明": "相对于工作目录；也可以写绝对路径。工作目录下没有 plugins 时会自动用程序自带的示例插件。",
+    "disabled": []
+  },
+  "session": {
+    "save": true,
+    "dir": ".mya/sessions",
+    "maxHistoryMessages": 200
+  },
+  "shell": {
+    "allowDangerous": false,
+    "$allowDangerous说明": "false 时只允许白名单只读命令；true 时交给每次执行前的确认来把关。",
+    "timeoutSec": 60
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "hello",
+  "version": "0.1.0",
+  "description": "最小示例插件：演示如何注册工具、注册斜杠命令、贡献系统提示词",
+  "entry": "index.js",
+  "author": "梦云Agent 自带示例",
+  "permissions": [],
+  "tags": ["example", "tutorial"]
+}

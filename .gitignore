@@ -1,0 +1,38 @@
+# 依赖与产物
+node_modules/
+dist/
+*.asar
+
+# 本地配置与密钥（绝对不要提交）
+# config.json 里会写你自己的网关地址和密钥，所以整份忽略；
+# 需要提交的模板是 config.example.json（敏感字段一律留空）。
+.env
+.env.local
+config.json
+config.local.json
+
+# 运行时数据
+.mya/
+sessions/
+*.log
+
+# 调试 / 排障留下的临时目录（.audit-* 是历史上排查问题产生的一次性脚本和页面）
+.audit-*/
+.audit-tmp/
+.audit-xss2/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 注意：build/icon.ico 和 build/icon.png 是需要的（应用图标），
+# 虽然它们由 desktop/make-icon.js 生成，但保留在版本库里更方便直接用。
+
+# npm pack 的产物（本地验证分发性时生成）
+*.tgz

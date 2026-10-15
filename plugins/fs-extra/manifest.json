@@ -1,0 +1,9 @@
+{
+  "name": "fs-extra",
+  "version": "0.1.0",
+  "description": "扩展文件工具：目录树、文件信息、批量查找空目录",
+  "entry": "index.js",
+  "author": "梦云Agent 自带示例",
+  "permissions": ["fs:read"],
+  "tags": ["files", "example"]
+}

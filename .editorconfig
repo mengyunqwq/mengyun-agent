@@ -1,0 +1,19 @@
+# 编辑器统一配置：换行、缩进、编码
+# 为什么需要：项目里 JS/CSS/HTML/MD 混着，Windows 上默认 CRLF、macOS/Linux 是 LF，
+# 不同编辑器又各按各的习惯缩进，diff 里全是空白噪音。这里钉死一套。
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.md]
+# markdown 里行尾两个空格是「强制换行」，不能删
+trim_trailing_whitespace = false
+
+[*.{cmd,bat}]
+end_of_line = crlf

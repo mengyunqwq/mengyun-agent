@@ -1,0 +1,137 @@
+{
+  "name": "mengyun-agent",
+  "version": "0.1.0",
+  "description": "梦云 Agent —— 本地一键部署、可插拔的编码智能体（类 Codex，零依赖）",
+  "author": "mengyunqwq",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mengyunqwq/mengyun-agent.git"
+  },
+  "homepage": "https://github.com/mengyunqwq/mengyun-agent#readme",
+  "bugs": {
+    "url": "https://github.com/mengyunqwq/mengyun-agent/issues"
+  },
+  "type": "commonjs",
+  "main": "desktop/main.js",
+  "bin": {
+    "mya": "bin/mya.js",
+    "mengyun": "bin/mya.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/mya.js desktop",
+    "desktop": "node bin/mya.js desktop",
+    "web": "node bin/mya.js web",
+    "chat": "node bin/mya.js chat",
+    "run": "node bin/mya.js run",
+    "doctor": "node bin/mya.js doctor",
+    "tools": "node bin/mya.js tools",
+    "plugins": "node bin/mya.js plugin list",
+    "selftest": "node test/selftest.js",
+    "e2e": "node test/mock-server.js",
+    "web-e2e": "node test/web-e2e.js",
+    "web-check": "node test/web-check.js",
+    "freeze-test": "node test/freeze-guard.js",
+    "web-search-test": "node test/web-search.js",
+    "context-test": "node test/context-compact.js",
+    "format-test": "node test/provider-formats.js",
+    "desktop-e2e": "node test/desktop-e2e.js",
+    "plugin-test": "node test/plugin-contract.js",
+    "log-test": "node test/logging.js",
+    "icon": "node desktop/make-icon.js",
+    "dist": "node desktop/build.js",
+    "dist:win": "node desktop/build.js",
+    "test:all": "node test/run-all.js",
+    "test": "node test/run-all.js",
+    "test:fast": "node test/run-all.js --skip-desktop",
+    "test:parallel": "node test/run-all.js --parallel=3",
+    "test:runner": "node test/run-all.js --self-test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"{src,web,test,desktop,plugins}/**/*.{js,css,html,json,md}\" \"*.{json,md}\""
+  },
+  "devDependencies": {
+    "electron": "44.4.4",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9"
+  },
+  "files": [
+    "bin/**/*",
+    "src/**/*",
+    "web/**/*",
+    "desktop/main.js",
+    "desktop/preload.js",
+    "desktop/make-icon.js",
+    "desktop/build.js",
+    "prompts/**/*",
+    "plugins/**/*",
+    "catalog/**/*",
+    "types/**/*",
+    "docs/**/*",
+    "build/icon.png",
+    "config.example.json",
+    "start.cmd",
+    "start.ps1",
+    "start.sh"
+  ],
+  "keywords": [
+    "agent",
+    "coding-agent",
+    "cli",
+    "llm",
+    "codex",
+    "local-first",
+    "zero-dependency"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./desktop": "./desktop/main.js",
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "desktop": {
+    "entry": "desktop/main.js"
+  },
+  "build": {
+    "appId": "com.mengyun.agent",
+    "productName": "梦云Agent",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      "web/**/*",
+      "prompts/**/*",
+      "plugins/**/*",
+      "catalog/**/*",
+      "bin/**/*",
+      "config.json",
+      "config.example.json",
+      "package.json",
+      "README.md",
+      "docs/**/*",
+      "!.mya/**",
+      "!dist/**"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "portable": {
+      "artifactName": "梦云Agent-${version}-免安装.exe"
+    },
+    "compression": "normal",
+    "asar": true
+  }
+}

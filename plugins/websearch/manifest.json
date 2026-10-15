@@ -1,0 +1,9 @@
+{
+  "name": "websearch",
+  "version": "0.1.0",
+  "description": "联网搜索（Tavily）与网页正文抓取，让 agent 能查最新文档",
+  "entry": "index.js",
+  "author": "梦云Agent 自带示例",
+  "permissions": ["net:fetch"],
+  "tags": ["web", "search", "example"]
+}

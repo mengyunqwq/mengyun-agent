@@ -1,0 +1,17 @@
+{
+  "$comment": "给编辑器的提示配置：插件作者在插件目录里放一份同样的 jsconfig.json，就能拿到 ctx 的补全与类型检查。详见 types/plugin.d.ts。",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["ES2022"],
+    "checkJs": false,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": false,
+    "resolveJsonModule": true,
+    "types": []
+  },
+  "include": ["types/**/*.d.ts", "src/**/*.js", "plugins/**/*.js", "desktop/**/*.js", "test/**/*.js"],
+  "exclude": ["node_modules", "dist", ".mya"]
+}

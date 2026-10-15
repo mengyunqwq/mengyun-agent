@@ -1,0 +1,17 @@
+{
+  "name": "context-compact",
+  "version": "0.1.0",
+  "description": "上下文压缩：对话变长时自动把较早的历史总结成一段摘要，避免撞上模型的上下文上限",
+  "entry": "index.js",
+  "author": "梦云Agent 内置",
+  "permissions": ["session"],
+  "config": {
+    "$说明": "这些默认值可以被 config.json 的 plugins.config['context-compact'] 覆盖，也可以直接用下面的环境变量",
+    "enabled": true,
+    "threshold": 0.75,
+    "keepRecent": 8,
+    "maxSummaryTokens": 1200,
+    "minMessages": 10,
+    "timeoutSec": 60
+  }
+}

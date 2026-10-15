@@ -1,0 +1,9 @@
+{
+  "name": "audit",
+  "version": "0.1.0",
+  "description": "审计与统计：记录所有工具调用到日志文件，附带黑名单拦截和用量统计",
+  "entry": "index.js",
+  "author": "梦云Agent 自带示例",
+  "permissions": ["fs:read", "fs:write"],
+  "tags": ["example", "safety", "hook"]
+}
